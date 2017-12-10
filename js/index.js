@@ -67,9 +67,9 @@ var LeaderBoard = React.createClass({
                     "td",
                     null,
                     React.createElement("img", { src: x.img }),
-                    " ",
+                    "         ",
                     x.username,
-                    " "
+                    "         "
                 ),
                 React.createElement(
                     "td",
