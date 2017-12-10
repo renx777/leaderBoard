@@ -1,0 +1,109 @@
+var LeaderBoard=React.createClass({
+
+    getInitialState:function(){
+        return{
+            url:""
+        };
+        
+    },
+    
+    componentDidMount:function(){
+       
+       this.serverRequestAllTime=$.get(this.props.allTime,function(result){
+
+       var z=result;
+        this.setState({
+            
+            alltime:z,
+            show:z
+            
+        })
+            }.bind(this))
+       
+        this.serverRequestRecent=$.get(this.props.recent,function(result){
+
+       var z=result;
+        this.setState({
+            
+            recent:z
+            
+            
+        })
+            }.bind(this))
+       
+       
+    },
+    componentWillUnmount:function(){
+        this.serverRequest.abort();
+    },
+    all:function(){
+        this.setState({
+    show:this.state.alltime
+})
+},
+    rec:function(){
+        this.setState({
+            show:this.state.recent
+        })
+        
+    },
+    
+    
+    render:function(){
+       console.log(this.state.data)
+        var list=this.state.show
+        var b=[]
+       for(var key in list){
+           b.push(list[key])
+           
+       }
+       console.log(b)     
+       var recentList=b.map(function(x,index){
+           return (
+        <tr>
+               <td>{index}</td>
+               <td><img src={x.img}/> {x.username} </td>
+               <td>{x.alltime}</td>
+               <td>{x.recent}</td>
+        </tr>
+               
+               
+               
+           
+           )
+           
+       }) 
+       
+        return(
+       <div>
+          
+          
+         <h1>Freecodecamp Leaderboard</h1> 
+          
+       <table onClick={this.morph}>
+<thead>
+  
+  <th>"#"</th>
+  <th>Camper Name</th>
+  <th onClick={this.all}><a>All time points</a></th>
+  <th onClick={this.rec}><a>Points in 30 days</a></th>
+  </thead>    
+   {recentList}
+</table>
+        </div>
+        
+        
+        
+        )
+        
+        
+    }
+    
+
+
+}) 
+
+
+ReactDOM.render(
+<LeaderBoard allTime="https://fcctop100.herokuapp.com/api/fccusers/top/alltime" recent="https://fcctop100.herokuapp.com/api/fccusers/top/recent"/>,document.getElementById('content'));
+
