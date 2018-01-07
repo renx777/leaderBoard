@@ -2,12 +2,13 @@
 .yellow { color: #FFF842; }
 
 body {
-  font-family: 'Open Sans', sans-serif;
+  font-family:'verdana';
   font-weight: 300;
   line-height: 1.42em;
   color:#A7A1AE;
   background-color:#1F2739;
 }
+
 
 h1 {
   font-size:3em; 
@@ -38,6 +39,8 @@ color:rgb(7, 182, 95);
 cursor: pointer;
 
 }
+
+
 
 
 .container th h1 {
